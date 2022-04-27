@@ -1,0 +1,49 @@
+qt处理程序异常崩溃
+
+
+程式难免会有异常崩溃的时候，重要的是在崩溃时能及时把重要的数据保存好，将损失减少。
+
+保存数据仅是拯救措施，更重要的是找到错误的根源。若能在崩溃的同一时候，程式自己主动记录下崩溃时的执行信息，将有助于修正工作。微软提供了“DbgHelp”错误调试技术。调用相关功能就可以保存程式崩溃时的信息，然后借助WinDbg软件就能分析出当时的执行状况。调用“DbgHelp”的MiniDumpWriteDump函数保存以“.dmp”为后缀的Dump文件，该文件能被WinDbg读取并分析。
+
+在头文件里包括“#include <Windows.h>”。
+
+加入头文件“#include <DbgHelp.h>”，在Pro文件里加入“LIBS += -lDbgHelp”。目的是链接DbgHelp库。
+
+
+LONG ApplicationCrashHandler(EXCEPTION_POINTERS *pException){//程式异常捕获
+    /*
+      ***保存数据代码***
+    */
+    //创建 Dump 文件
+    HANDLE hDumpFile = CreateFile(QTime::currentTime().toString("HH时mm分ss秒zzz.dmp").utf16(), GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    if( hDumpFile != INVALID_HANDLE_VALUE){
+        //Dump信息
+        MINIDUMP_EXCEPTION_INFORMATION dumpInfo;
+        dumpInfo.ExceptionPointers = pException;
+        dumpInfo.ThreadId = GetCurrentThreadId();
+        dumpInfo.ClientPointers = TRUE;
+        //写入Dump文件内容
+        MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), hDumpFile, MiniDumpNormal, &dumpInfo, NULL, NULL);
+    }
+    //这里弹出一个错误对话框并退出程序
+    EXCEPTION_RECORD* record = pException->ExceptionRecord;
+    QString errCode(QString::number(record->ExceptionCode,16)),errAdr(QString::number((uint)record->ExceptionAddress,16)),errMod;
+    QMessageBox::critical(NULL,"程式崩溃","<FONT size=4><div><b>对于发生的错误，表示诚挚的歉意</b><br/></div>"+
+        QString("<div>错误代码：%1</div><div>错误地址：%2</div></FONT>").arg(errCode).arg(errAdr),
+        QMessageBox::Ok);
+    return EXCEPTION_EXECUTE_HANDLER;
+}
+ int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);//注冊异常捕获函数
+    MainWindow w;
+    w.show();
+    return a.exec();
+}
+当被错误困扰得焦头烂额的时候。若是老天能直接告诉错误在哪一行代码该有多好呀。其实WinDbg就能做到。
+
+在项目的proproject文件里增加：QMAKE_LFLAGS_RELEASE = /INCREMENTAL:NO /DEBUG
+
+这句话的目的是Release版也将生成“.pdb”后缀的调试信息文件。在使用WinDbg导入Dump前。指定好源代码与pdb文件的位置。就可以在错误报告内看到罪魁祸首是哪一行代码。
+

@@ -1,0 +1,40 @@
+Qt的界面管理布局
+Layout
+
+
+
+QMainWindow
+QDialog
+QWidget
+
+
+
+
+模式和非模式对话框
+非模式对话框:
+    子窗体和父窗体互不影响
+模式对话框:
+    子窗体会阻塞父窗体的所有消息,只有将子窗体的消息处理完毕,父窗体才能接收到消息
+
+
+QDialog:
+    模态对话框:
+        1. exec
+        2. setModal(true)
+
+QWidget:
+    模态对话框:
+        1. setWindowModality(Qt::ApplicationModal);  // 模态 方法1
+        2. setAttribute(Qt::WA_ShowModal);                 // 模态 方法2
+
+
+
+独立对话框
+文件对话框（QFileDialog）
+消息对话框（QMessageBox）
+输入对话框（QInputDialog）
+颜色对话框（QColorDialog）
+字体对话框（QFontDialog） 
+
+
+

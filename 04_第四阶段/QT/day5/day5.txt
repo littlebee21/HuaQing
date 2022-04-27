@@ -1,0 +1,19 @@
+QSettings
+    读写配置文件
+    读写注册表
+
+注册:
+    GitHub
+    Gitee
+
+画画:
+    条件:
+        1> 画笔
+        2> 画布
+        3> 画刷
+        4> 橡皮
+        5> 颜料
+        6> 画家
+
+打包Qt  exe程序
+    windeployqt + exe的路径

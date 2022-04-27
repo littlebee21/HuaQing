@@ -1,0 +1,46 @@
+QLabel#lb_Logo{border-radius:7px; border-image: url(:/image/avantar.jpg);}
+QLabel#lb_Avantar{border-radius:10px; border-image: url(:/image/avantar.jpg);}
+QPushButton#loginBtn
+{
+    border-style:none;
+    border:0px solid #242424;
+    color:#DCDCDC;
+    padding:5px;
+    height:55;
+    width : 350;
+    border-radius:7px;
+    background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #646464,stop:1 #525252);
+}
+
+QPushButton#loginBtn:hover
+{
+    background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #484848,stop:1 #383838);
+}
+
+QPushButton#loginBtn:pressed
+{
+    background-color:#3B3B98
+}
+
+QPushButton#miniBtn{border-image: url(:/image/min/min_normal.png);}
+QPushButton#miniBtn:hover{border-image: url(:/image/min/min_hover.png);}
+QPushButton#miniBtn:pressed{border-image: url(:/image/min/min_pressed.png);}
+
+QPushButton#closeBtn{border-image: url(:/image/close/normal.png);}
+QPushButton#closeBtn:hover{border-image: url(:/image/close/hover.png);}
+QPushButton#closeBtn:pressed{border-image: url(:/image/close/pressed.png);}
+QLineEdit{border-radius:7px;border:0px;} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

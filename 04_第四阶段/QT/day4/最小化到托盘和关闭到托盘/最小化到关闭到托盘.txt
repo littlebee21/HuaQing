@@ -1,0 +1,15 @@
+// 关闭到托盘
+void BDRiskControlMainFrame::closeEvent(QCloseEvent *event)
+{
+    event->ignore();
+    hide();
+}
+
+// 最小化到托盘
+void BDRiskControlMainFrame::changeEvent(QEvent *event)
+{
+    if ((event->type() == QEvent::WindowStateChange) && this->isMinimized())
+    {
+        QTimer::singleShot(100, this, SLOT(close()));
+    }
+}

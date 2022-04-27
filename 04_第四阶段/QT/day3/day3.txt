@@ -1,0 +1,69 @@
+QHBoxLayout
+QVBoxLayout
+QFormLayout
+QGirdLayout
+
+
+QStackedLayout  ---  堆栈布局
+
+
+
+QRadioButton  
+    两种状态: 
+        checked
+        unchecked
+        默认是互斥
+
+    signal: 
+        togged
+
+QCheckBox
+    三种状态:
+        checked
+        unchecked
+        partiallyChecked(部分选择)
+    默认不是互斥
+
+        signal: stateChanged
+
+
+作业要求:
+    登录界面
+        两个LineEdit,一个pushButton,一个Logo的Label,还有一个透明的警告提示warnningLabel
+    登录成功界面
+        一个label: 显示登录成功
+
+所有LineEdit在输入之前都有提示:
+    例如:用户名输入框提示      请输入用户名
+           密码输入框提示          请输入密码
+LineEdit1: 输入用户名:   zhangsan
+LineEdit2: 输入密码:      abc123   ----  密码不能明码显示(小黑点)
+
+点击登录按钮:
+    登录成功: 切换到登录成功页面
+    登录失败:
+        1. 用户名输入错误
+            清空用户名和密码框
+            warnningLabel显示用户名输入错误,清重新输入用户名和密码
+
+        2. 密码输入错误
+            清空密码输入框
+            warnningLabel显示密码输入错误,清重新输入密码
+        
+        如果三次输入错误,则关闭整个应用程序
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

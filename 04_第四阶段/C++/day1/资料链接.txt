@@ -1,0 +1,41 @@
+【腾讯文档】C++11 nullptr关键字
+https://docs.qq.com/doc/DQUxCQUFnVnl2QWtS
+
+【腾讯文档】C++引用（Reference）
+https://docs.qq.com/doc/DQVVsYU9pQ1hQdldE
+
+【腾讯文档】内联函数(inline)
+https://docs.qq.com/doc/DQVNHcEdLaENMcld4
+
+【腾讯文档】输入输出流
+https://docs.qq.com/doc/DQW5DRmtzVGxNZlRG
+
+【腾讯文档】C++的布尔类型
+https://docs.qq.com/doc/DQXZudlROU29QZU5Y
+
+【腾讯文档】命名空间
+https://docs.qq.com/doc/DQUdsbk1hcW1HWXlt
+
+【腾讯文档】浅谈C、C++及兼容性
+https://docs.qq.com/doc/DQXNzUUtmbW9KT2Jo
+
+【腾讯文档】从C到C++
+https://docs.qq.com/doc/DQXBlRmRiRXBPVWll
+
+【腾讯文档】返回局部变量的指针和引用
+https://docs.qq.com/doc/DQXBMQXh0Z1dYdHNE
+
+【腾讯文档】C++中的结构体
+https://docs.qq.com/doc/DQUlpY2ZqS0JvQktr
+
+【腾讯文档】1.6  new和delete操作符
+https://docs.qq.com/doc/DQVJyZEJiTVFzdGFs
+
+【腾讯文档】1.5  C++强制类型转化
+https://docs.qq.com/doc/DQXVsYkhhQXBPYW5y
+
+【腾讯文档】CC++中const用法总结
+https://docs.qq.com/doc/DQWRNbmdtb0tBWnFE
+
+文档：C++ 预处理器.note
+链接：http://note.youdao.com/noteshare?id=a6040c34c469d2aa883403d6f56866a2&sub=8F5EA27702684D70830FC39285CFD7D4

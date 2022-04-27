@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>image/logo/logo.svg</file>
+        <file>image/buttons/close/close_hover.svg</file>
+        <file>image/buttons/close/close_normal.svg</file>
+        <file>image/buttons/close/close_press.svg</file>
+        <file>image/buttons/max/max_hover.svg</file>
+        <file>image/buttons/max/max_normal.svg</file>
+        <file>image/buttons/max/max_press.svg</file>
+        <file>image/buttons/min/min_hover.svg</file>
+        <file>image/buttons/min/min_normal.svg</file>
+        <file>image/buttons/min/min_press.svg</file>
+    </qresource>
+</RCC>

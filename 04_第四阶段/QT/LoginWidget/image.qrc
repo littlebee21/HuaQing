@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>image/avantar.jpg</file>
+        <file>image/close/normal.png</file>
+        <file>image/close/pressed.png</file>
+        <file>image/close/hover.png</file>
+        <file>image/min/min_hover.png</file>
+        <file>image/min/min_normal.png</file>
+        <file>image/min/min_pressed.png</file>
+    </qresource>
+</RCC>

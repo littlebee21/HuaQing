@@ -1,0 +1,500 @@
+1.复习
+	[1] 嵌入式系统 
+		核心 : 根据客户的需求做软硬件的"定制"
+	[2] 计算机的基本组成原理 
+		(1) 冯诺依曼体系结构
+			1) 计算机由五个部分组成：运算器、控制器、存储器、输入设备、输出设备
+			2) 程序的存储思想：存储程序思想——指令和数据不加区别混合存储在同一个存储器中	
+			3) 计算机的数制 ： 二进制 
+			4) 程序按顺序执行 
+			......
+		(2) 典型的计算机结构 
+			1) CPU : 中央处理器  
+				运算器 	执行算术或逻辑运算 
+				控制器  取指 -> 译码  -> 执行 
+				寄存器 	在CPU内部的一类存储设备，容量小但速度快
+						特殊功能的寄存器PC : 指定取指令的地址
+			2) 主存(内存)
+			3) I/O 设备 
+			4) 总线(BUS)
+				数据总线(DB)
+				地址总线(AB)
+				控制总线(CB)
+		(3) 存储器的种类 
+			寄存器  (register)
+			高速缓存(cache)
+			主存    (ram) : 上电之后才能保存数据,掉电数据丢失
+			外部存储器(rom)
+			...
+		(4) 操作系统(Operation System : OS)
+			作用： 
+				是管理和控制计算机硬件与软件资源的计算机程序，
+				是直接运行在“裸机”上的最基本的系统软件，任何其他软件都必须在操作系统的支持下才能运行。
+			操作系统核心(Kernel)： 
+				内存管理、进程管理、文件管理、网络管理、设备管理
+	[3] Linux 操作系统  
+		Linux系统特点：
+			支持多用户、多任务、多平台 
+			开放源代码，成本低廉；
+			网络功能、文件系统功能强大；
+			Linux主要应用于服务器、桌面和嵌入式系统。 
+		发型版本： 
+			Ubuntu 乌班图 
+	
+	[4] 文件系统 
+		1) 作用：
+			操作系统中负责管理和存储文件信息的软件机构称为文件管理系统，简称文件系统。
+		2) Linux文件系统结构 
+			树形结构  
+		3) FHS 标准  
+			为了规范文件目录命名和存放标准，Linux基金会颁发了FHS(Filesystem Hierarchy Standard)。
+		4) 文件路径的表示 
+			a. 绝对路径 以根目录作为起点，描述文件在文件系统中的绝对位置 
+				/usr/games/gnomine 
+			b. 相对路径 以当前目录作为起点，描述文件相对于当前目录的位置  
+				. 		当前目录
+				..		上级目录 
+				../..	上级的上级目录
+		
+	[5] 终端的使用  
+		1) 作用 ：用户登录 + 执行指令 + 显示运行结果
+		2) 操作 ： 
+			a. 打开终端  
+				ctrl + alt + t
+				ctrl + shift + n
+				ctrl + shift + t
+			b. 放大终端字体 
+				ctrl + shift + '+' 
+			c. 缩小终端字体
+				ctrl + '-'
+			d. 最大化 
+				ctrl + win + '↑'
+			e. 最小化 
+				ctrl + win + '↓'
+			f. 关闭终端  
+				alt + F4 或 exit
+	
+	[6] 命令提示符  
+		表示一行命令的开始
+		用户名@主机名:当前路径$
+		
+		用户类型: 
+				$	普通用户
+				#	超级用户 (root 相当于管理员，拥有整个系统的最高权限)
+				
+	[7] 用户主目录  
+		Linux系统在创建新用户的时会为每一个用户创建一个属于该用的主目录(家目录)；
+		如果没有权限，其他用户无法访问。
+			位置： 
+				普通用户： 默认在 /home 创建与用户名同名的目录作为 主目录  
+						fs =>  /home/fs  
+						zhangsan  => /home/zhangsan 
+				超级用户:  
+						/root	根用户（超级用户）的主目录	
+		注意：对于当前用户，可以使用 "~" 表示主目录的路径 
+
+========================================================================================================
+2.用户相关命令  
+	[1] 用户切换命令 -- su  
+		语法格式：su + 用户名
+		eg: 
+			su root 
+			
+	[2] 临时获取超级用户权限(15-20分钟) -- sudo
+		语法格式：sudo + command		//表示以超级用户身份运行该条命令
+		eg: 关机 shutdown 
+			shutdown -h time 			//定时关机(分钟)
+		输入sudo命令后，需要输入Linux系统的登录密码才可执行该指令。	
+	
+		ctrl + c  强制终止程序
+		
+	[3] 修改密码 -- passwd 
+		语法格式：passwd + 用户名
+		eg: 
+			sudo passwd root 
+		
+		注意：如果不指定用户名，默认修改当前用户的密码
+		
+3.查询帮助  -- man(manual) 手册 
+	有困难找男人	man man 
+	   1   Executable programs or shell commands				//shell 命令
+       2   System calls (functions provided by the kernel)		//系统调用(由Linux Kernel 提供的函数接口)
+       3   Library calls (functions within program libraries)	//库函数
+       4   Special files (usually found in /dev)				//特殊文件
+       5   File formats and conventions eg /etc/passwd			//特殊文件的格式
+       6   Games												//游戏
+       7   Miscellaneous  (including  macro  packages and conventions), e.g.	//杂项
+           man(7), groff(7)
+       8   System administration commands (usually only for root)	//root 用户使用的命令
+       9   Kernel routines [Non standard]						//Linux Kernel的函数
+	指令格式:  
+	   man [page] 查询的内容
+	   man -k 查询的内容					//模糊查询
+	eg:  
+		man printf
+		man 3 printf
+		man 7 ascii
+		
+4.浏览目录
+	[1] 自我定位 -- pwd
+		pwd命令用于显示用户在文件系统中的当前位置，该命令没有任何选项和参数，
+	命令执行结果显示为绝对路径名。
+	
+	[2] 列举目录内容 -- ls (list)
+		语法格式：
+			ls [OPTION]... [FILE]...
+		使用示例：
+			ls  : 显示当前目录下的文件或者目录
+			ls -a：显示所有文件包含隐藏文件（以.开头的文件就是隐藏文件）
+			ls -r：逆向显示文件
+			ls -R：递归地列举所有目录（在当前目录下）的所有内容
+			ls -l：详细显示文件属性
+			
+			-rwxrwxr-x  	1 		fs   fs    	7161 	Nov 26 09:01 	a.out
+			----------	  -----		--	 --		----	------------	-----
+			  文件类型	  	|		|	  |		  |			 |			  |
+			  访问权限	  链接数	|	  |		  |			 |			  |
+								 用户名	  |		  |			 |			  |
+										用户组名  |			 |			  |
+												文件大小	 |			  |
+														文件访问时间	  |
+																		文件名
+			文件类型:
+				普通文件  		-		指ASCII文本文件、二进制可执行文件，以及硬件链接
+				目录文件 		d		文件夹，包含若干子目录或文件
+				链接文件  		l 		类似于Windows快捷方式
+				管道文件		p		用于Linux进程之间通信时使用
+				字符设备文件	c		原始输入/输出设备文件,每次I/O操作仅传送一个字符
+				块设备文件 		b		块输入/输出设备文件，以块为单位进行I/O的操作。
+				套接字文件		s  		网络通信时使用的文件
+				
+			文件访问权限: 
+				rwx			rwx			r-- 
+				 |			 |			|
+			 文件拥有者		 |			|
+						 用户组成员		|
+									其他用户
+									
+			r 	-- 读权限 
+		    w 	-- 写权限 
+			x 	-- 执行权限 
+			'-' -- 无权限
+		
+			权限码
+				rwxrwxr-x
+				111	111	101		//421
+				7	7	5
+	[3] 修改文件的访问权限 -- chmod	
+		指令格式： 
+			chmod 	权限码	文件
+			chmod 	权限码	文件 [-R]
+			或  
+			chmod [-R] 	权限码	文件 
+		eg: 
+			fs@ubuntu:~$ chmod 766 Desktop
+		注意： 
+			-R 递归修改子目录下文件的访问权限
+			
+	[4] 切换目录 -- cd
+		语法格式： 
+			cd  + 目录路径 (绝对路径,相对路径)
+		示例： 切换到主目录下的Desktop
+			fs@ubuntu:~$ cd /home/fs/Desktop
+			fs@ubuntu:~$ cd ~/Desktop
+			fs@ubuntu:~$ cd ./Desktop
+			fs@ubuntu:~$ cd Desktop			
+		注意：如果访问的文件或目录就在当前目录下，只需要提供文件名即可。
+			fs@ubuntu:~/Desktop$ cd ..			//切换到上级目录
+	
+			进入用户主目录：
+				cd
+				cd  ~
+			进入根目录 	
+				cd  /
+			不移动 
+				cd  .
+			切换到指定用户的主目录	
+				cd  ~username
+			切换到上次操作的目录	
+				cd - 
+
+5.文件及目录基本操作
+	[1] 创建指定名称的目录 -- mkdir(make directory)
+		指令格式： 
+			mkdir 路径/目录名
+			mkdir -p 子目录1/子目录2		递归的创建子目录
+			mkdir -v 目录名					创建目录后显示信息
+			mkdir -m 权限码 目录名			创建一个权限为（权限码）的空目录
+		eg: 
+			fs@ubuntu:~$ mkdir Desktop/zhangsan
+		注意: 
+			要求用户在当前目录下具有写权限，并且要创建的目录不能与已有目录重名。
+			
+	[2] 创建普通文件(文件不存在),修改文件的访问时间(文件已存在) -- touch
+		语法格式：
+			touch 路径/文件名
+			touch [-t] 路径/文件名
+					-t所需要的时间格式：[[CC]YY]MMDDhhmm[.SS]，如201410112233.44
+		eg: 
+			fs@ubuntu:~$ touch hello.txt
+			fs@ubuntu:~$ touch -t 202112121212.12 a.out
+			
+	练习: 
+		1) 在主目录下创建目录 class21121 
+			fs@ubuntu:~$ cd
+			fs@ubuntu:~$ mkdir class21121
+		2) 在class21121目录下创建一个和你名字相同的文件 如 "zhangsan"
+			fs@ubuntu:~$ touch class21121/xiaoming
+		3) 修改文件的访问权限，使得文件拥有者可读可写可执行，用户组拥有读和写权限，其他用户拥有读权限 
+			111 110	100
+			7	6	 4
+			fs@ubuntu:~$ chmod 764 class21121/xiaoming 
+		4) 修改文件的访问时间为 2022年1月28日13:56:05
+			fs@ubuntu:~$ touch -t 202201281356.05 class21121/xiaoming 
+			
+	[3] 删除文件或目录 -- rm (remove)
+		语法格式：
+			rm  [ -i | -f | -r | -v ]  目录/文件
+		可选项：
+			-f	非交互模式的删除操作，忽略不存在的文件
+			-i	交互模式的删除操作。在删除目标文件之前将给出提示，要求用户确认，回答“y”表示目标文件将被删除
+			-r	若源文件是一个目录，rm命令将递归地删除该目录下的所有子目录和文件
+			-v	显示详细的删除过程
+		示例:  
+			fs@ubuntu:~$ rm hello.txt 
+			fs@ubuntu:~$ rm -r Desktop/zhangsan
+			
+	[4] 删除空文件夹 -- rmdir (remove directory)
+		语法格式：
+			rmdir  [ -p ]   directory_name 
+		注意： 
+			使用选项“-p”表示可以递归删除子目录，即多层目录。需要说明的是，删除的目录必须为空目录
+		示例:  
+			fs@ubuntu:~$ rmdir -p Anhui/LuAn
+			
+	[5] 复制文件或目录 -- cp (copy)
+		语法格式：
+			cp 源文件 目标目录		：复制源文件到目标目录中（目标目录中无该源文件）
+			cp 源文件 目标目录/文件名 : 复制源文件到目标目录中并重命名
+			cp -a 源目录 目标目录	：复制整个目录到目标目录	
+			cp -a 源目录/. 目标目录	：复制整个目录的文件到目标目录
+		可选项：  
+			-f	非交互模式的复制操作。覆盖已经存在的目标文件而不提示
+			-i	交互模式的复制操作，与-f选项相反。在覆盖目标文件之前将给出提示，要求用户确认，回答“y”表示目标文件将被覆盖
+			-v	显示详细的复制过程
+		示例:  
+			fs@ubuntu:~$ cp hello.txt vesafb.ko class21121
+			fs@ubuntu:~$ cp -a test class21121
+
+	[6] 移动, 重命名 文件/目录 -- mv(move)
+		语法格式：
+			mv 源文件 目标文件		：将源文件重命名为目标文件(目标文件必须不存在,如果存在则将覆盖目标文件)
+			mv 源文件 目标目录		：将源文件移动至目标目录（目标目录必须存在）
+			mv 源目录 目标目录		：如果目标目录存在，则将源目录移动至目标目录；
+									 如果目标目录不存在，则重命名该目录为目标目录
+		注意： 源文件或目录可以有多个
+		示例:  
+			fs@ubuntu:~$ mv hello.txt readme.txt		//重命名
+			fs@ubuntu:~$ mv QQ class21121				//移动  
+			fs@ubuntu:~$ mv QQ WeChat					//重命名 
+	
+	[7] 查看文件内容 -- cat
+		语法格式：
+			cat  文件名 
+		fs@ubuntu:~/class21121$ echo "hello xiaoming"		//	echo 回显 
+		fs@ubuntu:~/class21121$ echo "hello" > xiaoming.txt	// > 重定向符
+
+	练习: 	
+		1)	改变当前工作目录为当前用户的主目录(home目录)
+			fs@ubuntu:~/class21121$ cd
+			fs@ubuntu:~$ 
+		2)	创建tmp目录
+			fs@ubuntu:~$ mkdir tmp
+		3)	切换到tmp目录
+			fs@ubuntu:~$ cd tmp
+		4)	创建test目录
+			fs@ubuntu:~/tmp$ mkdir test
+		5)	切换到test目录
+			fs@ubuntu:~/tmp$ cd test
+		6)	显示当前工作目录路径
+			fs@ubuntu:~/tmp/test$ pwd
+			/home/fs/tmp/test
+		7)	创建一个空的文件test1
+			fs@ubuntu:~/tmp/test$ touch test1
+		8)	拷贝test1到当前工作目录下更名为test2
+			fs@ubuntu:~/tmp/test$ cp test1 test2
+		9)	拷贝test1到上级父目录下，并更名为test3（要求本次操作不改变当前的工作目录）
+			fs@ubuntu:~/tmp/test$ cp test1 ../test3
+		10)	将test2移动到上级父目录下，但不改变名称。. （要求本次操作不改变当前的工作目录）
+			fs@ubuntu:~/tmp/test$ mv test2 ..
+		11)	显示当前目录下的文件，显示每个文件的详细信息
+			fs@ubuntu:~/tmp/test$ ls -l
+			total 0
+			-rw-rw-r-- 1 fs fs 0 Dec  8 15:40 test1
+		12)	更改test1的名称为test4，仍在原目录下。 
+			fs@ubuntu:~/tmp/test$ mv test1 test4
+		13)	返回上级目录
+			fs@ubuntu:~/tmp/test$ cd ..
+		14)	显示当前目录下的文件，显示每个文件的详细信息
+			fs@ubuntu:~/tmp$ ls -l
+		15)	强制删除test目录
+			fs@ubuntu:~/tmp$ rm -r test
+		16)	显示当前目录下的文件，显示每个文件的详细信息
+			fs@ubuntu:~/tmp$ ls -l
+		17)	删除test2 test3
+			fs@ubuntu:~/tmp$ rm test2 test3
+		18)	返回上级目录
+			fs@ubuntu:~/tmp$ cd ..
+		19)	删除tmp
+			fs@ubuntu:~$ rm -r tmp
+		20)	显示当前目录下的文件
+			fs@ubuntu:~$ ls
+		21)	清屏幕
+			fs@ubuntu:~$ clear
+
+	作业：  
+		1)在当前用户的家目录下创建 21121 和 21122 和 21123 三个目录
+		2)在 21121目录下 创建四个文件 file1 file2 file3 file4 和 两个目录 day1 day2 
+		3)将 day1 file1 file4 拷贝到 21122目录 
+		4)将 day2 file2 file3 剪切到 21123目录 
+		5)删除 21121目录下的所有内容
+		6)删除 21121目录 
+		7)将21123目录下的所有内容拷贝到21122目录
+		8)删除 21123目录 
+		9) 将 21122 目录拷贝到根目录并重命名为 2021
+		10) 删除 2021 目录下除了file1和file3以外所有的文件和目录 
+		11) 删除 2021目录 
+			
+6. vim 编辑器
+		Vim 是Linux系统下一个功能强大、高度可定制的文本编辑器，它基于VI，同时又增加了许多新的特性。
+	Vim与Emacs并列为类Unix系统用户最喜欢的文本编辑器。
+		Vim  	编辑器之神
+		Emacs	神的编辑器
+		
+	[1] 打开vim
+		vi/vim + [filename]		//filename 可以是不存在的文件，保存时可以自动生成
+		
+	[2] vim 工作模式
+		Vim编辑器基本上可以分为3种模式
+			1) 命令模式(command mode) : 默认进入的模式，控制屏幕光标的移动，进行文本的删除、复制等文字编辑工作。
+									以及进入插入模式，或者回到底行模式。 
+			2) 插入模式(insert mode) : 编辑模式  
+			3) 底行模式(last line mode) : 保存文件或退出Vim，同时也可以设置编辑环境和一些编译工作，
+									如列出行号、寻找字符串等。
+	
+	[3] 模式切换 
+		(1)默认进入 命令模式  
+		(2)命令模式 -> 插入模式  : i,I,a,A,o,O
+			1) 插入 ：insert	简写 i 或 I
+				i : 从光标的位置进入插入模式  
+				I : 从光标所在行第一个非空白字符进入插入模式 
+			2) 追加 : append	简写 a 或 A 
+				a : 从光标的下一个位置进入插入模式  
+				A : 从光标所在行的行尾进入插入模式
+			3) 打开 : open      简写 o 或 O 
+				o : 从光标所在行的下一行新建一行进入插入模式 
+				O : 从光标所在行的上一行新建一行进入插入模式
+		(3)命令模式 -> 底行模式  : ":", "/", "?"
+		(4)返回命令模式 -> ESC 
+		
+	[4] 命令模式
+		(1) 光标移动 
+			h：向左移动
+			j：向下移动
+			k：向上移动
+			l：向右移动
+
+			b：移动到当前单词开始,移动到前一个单词的开头
+			e：移动到当前单词结尾,移动到下一个单词的结尾
+			w：移动到下一个单词
+		
+			行首：0
+			行尾：$
+
+			文件头：gg
+			文件最后一行：G
+
+			gg=G			自动对齐代码
+		(2) 复制剪切粘贴操作
+			1) 按行复制/剪切命令
+				yy 	------------------  复制一行
+				dd  ------------------  剪切一行
+			2) 粘贴操作
+				p/P
+			3) 多行复制命令
+				nyy	------------------  复制n行
+				ndd	------------------  剪切n行
+			4) 对光标位置到该行的结尾进行复制/剪切
+				y$  
+				d$
+				
+		(3) 错误撤销恢复
+			撤销  ---------------------- u , 如果需要多次撤销，则多次按u键就可以了
+			恢复  ---------------------- ctrl+r
+			
+	[5] 底行模式 
+		(1) 保存&退出 操作 
+			:w 					保存文件 
+			:w path/filename 	另存为
+			:q					退出 
+			:wq     			保存并退出
+			:x					等价于wq
+			:wq path/filename 	另存文件并退出 
+			   				
+			:w! 				强制保存 
+			:q! 				强制退出 
+			:wq! 				强制保存并退出 
+			
+		(2) 查询操作 
+			/ 或 ? 
+			使用方法： 
+				/<需要查询的字符串>		向下查询
+				?<需要查询的字符串>		向上查询
+			可以通过 n 或 N 在关键字之间进行跳转 
+			
+			:set hlsearch  				设置高亮显示
+			:set nohlsearch 或 nohls	设置非高亮显示
+			
+		(3) 替换操作 
+			:range[s]/string1/string2/[g][c]
+				1)range -- 表示需要替换的范围
+					1,10		从第1行到第10行
+					%			所有行 
+					.			当前行  
+					$			最后一行
+				2)[s] -- 必选项,表示进行替换 
+				3)string1 -- 表示需要替换的字符串 
+				4)string2 -- 表示替换的字符串 
+				5)[g] -- 可选项 ,替换匹配行所有匹配的字符串,否则只会替换1个 
+				6)[c] -- 可选项, 替换前先询问
+			eg: 
+				.,$s/hello/nihao/gc 
+				
+		(4) 其他操作
+		
+	作业: 
+		使用vi输出创建文件，键入内容并保存。内容要求和vi.c一致。
+		
+	作业： 
+		自己整理笔记
+
+			
+			
+			
+			
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

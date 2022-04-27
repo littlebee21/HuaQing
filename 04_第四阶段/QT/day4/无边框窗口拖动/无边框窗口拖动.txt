@@ -1,0 +1,42 @@
+在设计中经常需要移除默认边框并自定义软件边框，但是移除原始边框后拖动又是一个问题。以下以代码形式介绍如何实现QT窗口无边框拖动。 
+
+移除了默认的边框，添加了border并设置了颜色，同时实现了全窗口的点击拖动。 
+下面开始介绍如何实现：
+
+一. 移除默认边框/标题栏 在QWidget的构造函数中调用setWindowFlags隐藏标题栏
+
+setWindowFlags(Qt::FramelessWindowHint | windowFlags());
+
+二. 设置窗口拖动 
+	通过重写mouseReleaseEvent、mousePressEvent、mouseMoveEvent三个函数来实现拖动，具体代码如下：
+
+
+void mousePressEvent(QMouseEvent *);
+    void mouseMoveEvent(QMouseEvent *);
+    void mouseReleaseEvent(QMouseEvent *);
+
+private:
+    bool m_bPressed;    //鼠标按下标志（不分左右键）
+    QPoint m_posArea;
+
+
+cpp中
+
+void Widget::mousePressEvent(QMouseEvent *e)
+{
+    // 鼠标左键
+    if(e->button() == Qt::LeftButton)
+        m_posArea = e->pos();
+    m_bPressed = m_areaMovable.contains(m_posArea);
+}
+
+void Widget::mouseMoveEvent(QMouseEvent *e)
+{
+    if(m_bPressed)
+        move(pos() + e->pos() - m_posArea);
+}
+
+void Widget::mouseReleaseEvent(QMouseEvent *e)
+{
+    m_bPressed = false;
+}

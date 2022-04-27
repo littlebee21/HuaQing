@@ -1,0 +1,142 @@
+Qt 简介
+Qt 应用范围
+开发环境
+Qt Creator 安装
+Qt内存管理
+第一个Qt程序
+打印跟踪
+信号与槽
+
+
+没有特殊要求的情况下,explicit用来修饰单形参的构造函数
+用来方式从该形参类型向类类型隐式转换
+
+
+NULL 
+nullptr
+0
+
+Qt的内存管理:
+    C动态内存管理:
+        molloc/relloc/calloc/alloc
+        free
+    一般malloc/free成对出现,如果只malloc没有free则会造成内存泄漏
+    如果重复释放内存会造成程序崩溃
+
+    C++中的内存管理:
+        new/new[]
+        delete/delete[]
+        分别调用构造和析构函数,能更好的管理C++的内存
+
+    Qt内存管理:
+        在有时候,你会看到,new过以后,并没有delete
+    在Qt中有一个基类QObject,只要有将这个类设置为基类,则new以后不需要delete
+
+
+所有从QObject继承出来的子对象的内存管理都转移给了父对象
+使用new在堆上分配内存
+子对象可自动被父对象删除内存
+手动删除不会引起二次删除，子对象删除时会通知父对象
+没有父对象的对象需要手工删除
+没有父对象的对象一般分配在栈区，这样可以有效避免内存泄漏
+Qt没有自动回收站的机制，需要关注父子关系及其功能
+
+A *pA = new A(QObject *);
+if(!pA)
+    return;
+    ...
+delete pA;
+pA = nullptr;
+
+// 支持高分屏按比例缩放
+    // 如果电脑是高分屏(2K)电脑,则需要添加这行代码
+    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
+Qt中的打印类  QDebug
+
+函数重载的条件
+    1. 在相同作用域内
+    2. 函数名相同
+    3. 函数签名不同
+        1> 参数类型不同
+        2> 参数个数不同
+    注意: 函数返回值不同不能作为重载的条件
+
+C:  
+    printf
+
+    printf("Hello world\n");
+    printf("%d\n", a);
+
+#include <iostream>
+using namespace std;   // 或者用这个,或者+std::
+C++:
+    std::cout
+
+#include <QDebug>
+qDebug() << 
+
+
+Qt中信号和槽机制
+
+多数GUI编程中,界面组件之间的通信用 回调函数
+MFC中使用消息机制
+
+
+
+    信号与槽（Signal & Slot）是 Qt 编程的基础，也是 Qt 的一大创新。因为有了信号与槽的编程机制，在 Qt 中处理界面各个组件的交互操作时变得更加直观和简单。
+
+    信号（Signal）就是在特定情况下被发射的事件，例如PushButton 最常见的信号就是鼠标单击时发射的 clicked() 信号，一个 ComboBox 
+最常见的信号是选择的列表项变化时发射的 CurrentIndexChanged() 信号。
+
+GUI 程序设计的主要内容就是对界面上各组件的信号的响应，只需要知道什么情况下发射哪些信号，合理地去响应和处理这些信号就可以了。
+
+    槽（Slot）就是对信号响应的函数。槽就是一个函数，与一般的C++函数是一样的，可以定义在类的任何部分（public、private 或 protected），可以具有任何参数，
+也可以被直接调用。槽函数与一般的函数不同的是：槽函数可以与一个信号关联，当信号被发射时，关联的槽函数被自动执行。
+
+信号与槽关联是用 connect() 函数实现的，其基本格式是：
+QObject::connect(sender, SIGNAL(signal()), receiver, SLOT(slot()));
+connect() 是 QObject 类的一个静态函数，而 QObject 是所有 Qt 类的基类，在实际调用时可以忽略前面的限定符，所以可以直接写为：
+connect(sender, SIGNAL(signal()), receiver, SLOT(slot()));
+其中，sender 是发射信号的对象的名称，signal() 是信号名称。信号可以看做是特殊的函数，需要带括号，有参数时还需要指明参数。
+receiver 是接收信号的对象名称，slot() 是槽函数的名称，需要带括号，有参数时还需要指明参数。
+
+
+
+发送者: sender ------> signal 
+接收者: reciever ------> slot 
+
+通过connect把信号和槽关联起来
+
+connect(sender, SIGNAL(signal), reciever, SLOT(reciever));
+注意: 使用信号和槽需要一个前提条件: 
+    Q_OBJECT
+
+
+注意:只要在GUI界面上拖动上去的组件,都用    ui->   来访问
+
+
+
+原型：
+QMetaObject::Connection QObject::connect(const QObject * sender, const char * signal, const QObject * receiver, 
+    const char * method, Qt::ConnectionType type = Qt::AutoConnection); 
+槽函数执行方式分为：自动、直接、队列、阻塞队列等等。
+信号与槽关联
+QObject::connect( sender, SIGNAL(signal),receiver, SLOT(method) );
+信号与信号相连
+QObject::connect( sender, SIGNAL(signal), receiver, SIGNAL(signal) );
+同一个信号连接到多个槽
+QObject::connect( sender, SIGNAL(signal),receiver, SLOT(method1) );
+QObject::connect( sender, SIGNAL(signal),receiver, SLOT(method2) );
+......
+多个信号连接到同一个槽
+QObject::connect( sender, SIGNAL(signal1),receiver, SLOT(method) );
+QObject::connect( sender, SIGNAL(signal2),receiver, SLOT(method) );
+......
+
+
+信号和槽的参数对应关系:
+    一般情况下,信号的参数类型和个数 与 槽的 参数类型和个数一致
+    至少信号的参数个数不能少于槽的参数个数
+
+emit用来发射自定义信号

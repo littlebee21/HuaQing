@@ -1,0 +1,80 @@
+QLabel#logoLabel
+{
+    border-image: url(:/image/logo/logo.svg);
+}
+
+QPushButton#minBtn
+{
+    border-image: url(:/image/buttons/min/min_normal.svg);
+}
+
+QPushButton#minBtn:hover
+{
+    border-image: url(:/image/buttons/min/min_hover.svg);
+}
+
+QPushButton#minBtn:pressed
+{
+    border-image: url(:/image/buttons/min/min_press.svg);
+}
+
+QPushButton#maxBtn
+{
+    border-image: url(:/image/buttons/max/max_normal.svg);
+}
+
+QPushButton#maxBtn:hover
+{
+    border-image: url(:/image/buttons/max/max_hover.svg);
+}
+
+QPushButton#maxBtn:pressed
+{
+    border-image: url(:/image/buttons/max/max_press.svg);
+}
+
+QPushButton#closeBtn
+{
+    border-image: url(:/image/buttons/close/close_normal.svg);
+}
+
+QPushButton#closeBtn:hover
+{
+    border-image: url(:/image/buttons/close/close_hover.svg);
+}
+
+QPushButton#closeBtn:pressed
+{
+    border-image: url(:/image/buttons/close/close_press.svg);
+}
+
+QLabel#windowText
+{
+    text: "TIM"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

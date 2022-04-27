@@ -1,0 +1,4 @@
+Message:This is a debug message. File:main.cpp  Line:62  Function:int qMain(int, char**)  DateTime:2019-04-01 23:54:13 周一
+Message:This is a warning message. File:main.cpp  Line:63  Function:int qMain(int, char**)  DateTime:2019-04-01 23:54:13 周一
+Message:This is a critical message. File:main.cpp  Line:64  Function:int qMain(int, char**)  DateTime:2019-04-01 23:54:13 周一
+Message:This is a fatal message. File:main.cpp  Line:65  Function:int qMain(int, char**)  DateTime:2019-04-01 23:54:13 周一

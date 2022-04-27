@@ -1,0 +1,113 @@
+
+QComboBox提供了一种向用户呈现选项列表的方式，其占用最小量的屏幕空间。
+
+组合框是一个显示当前项目的选择小部件，可以弹出可选项目列表。 组合框可以是可编辑的，允许用户修改列表中的每个项目。
+
+组合框可以包含像素图以及字符串; insertItem()和setItemText()函数适当重载。 
+对于可编辑组合框，提供了函数clearEditText()，以清除显示的字符串而不更改组合框的内容。
+
+如果组合框的当前项目发生更改，currentIndexChanged()和activate()会发出两个信号。 无论以编程方式或通过用户交互完成更改，currentIndexChanged()总是被发射，而只有当更改由用户交互导致时才激活。 突出显示的()信号在用户突出显示组合框弹出列表中的项目时发出。 所有三个信号都有两个版本，一个带有QString参数，另一个带有int参数。 如果用户选择或突出显示一个像素图，则只会发出整型信号。 每当可编辑组合框的文本发生改变时，editTextChanged()信号就会发出。
+
+可以使用插入函数insertItem()和insertItems()来填充组合框。 
+可以使用setItemText()更改项目。 
+一个项目可以使用removeItem()来移除，所有项目都可以使用clear()来移除。 
+当前项目的文本由currentText()返回，编号项目的文本使用text()返回。 
+当前项目可以使用setCurrentIndex()来设置。 
+count()返回组合框中的项目数; 
+可以用setMaxCount()设置项目的最大数量。 
+您可以允许使用setEditable()进行编辑。 
+
+
+属性
+
+1、count : const int
+
+该属性保存组合框中的项目数量。
+
+默认情况下，对于空组合框，此属性的值为0。
+
+访问函数；
+
+int count() const
+
+
+2、currentIndex : int
+
+该属性包含组合框中当前项目的索引。
+
+插入或删除项目时，当前索引可能会更改。
+
+默认情况下，对于未设置当前项目的空组合框或组合框，此属性的值为-1。
+
+访问函数；
+int currentIndex() const
+void setCurrentIndex(int index)
+
+通知信号;
+void currentIndexChanged(int index)
+void currentIndexChanged(const QString &text)
+
+
+4、currentText : QString
+
+该属性保存当前文本。
+
+如果组合框是可编辑的，则当前文本是线条编辑显示的值。 否则，如果组合框为空或未设置当前项目，则为当前项目的值或空字符串。
+
+如果组合框是可编辑的，则setter setCurrentText()只需调用setEditText()。 否则，如果列表中有匹配的文本，则将currentIndex设置为相应的索引。
+
+访问函数；
+
+QString currentText() const
+void setCurrentText(const QString &text)
+通知信号；
+
+void currentTextChanged(const QString &text)
+
+
+5、maxCount : int
+
+该属性拥有组合框中允许的最大项目数。
+
+注意：如果您将最大数量设置为小于组合框中当前数量的项目，则额外项目将被截断。 如果您在组合框上设置了外部模型，这也适用。
+
+默认情况下，此属性的值来自可用的最高有符号整数(通常为2147483647)。
+
+访问函数；
+
+int maxCount() const
+void setMaxCount(int max)
+
+
+
+
+
+
+
+#include <QStringList>
+
+Widget::Widget(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::Widget)
+{
+    ui->setupUi(this);
+    ui->comboBox->setMaxCount(5);   // 设置最大行数
+    QStringList list;
+    list << "a" << "b" << "c" << "d" << "e" << "f" << "g";
+    ui->comboBox->addItems(list);
+    ui->comboBox->addItem("1");
+    ui->comboBox->addItem("a");
+    ui->comboBox->addItem("abc");
+
+    ui->comboBox->setCurrentIndex(4);   // 设置当前默认项为第5行数据
+
+    connect(ui->comboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(valueChanged(int)));
+}
+
+void Widget::valueChanged(int)
+{
+    int currentIndex = ui->comboBox->currentIndex();
+    QString currentText = ui->comboBox->currentText();
+    qDebug() << "totle = " << ui->comboBox->count();
+    qDebug() << currentIndex << currentText;
+}

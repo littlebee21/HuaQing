@@ -1,0 +1,4 @@
+    QSettings settings("img/config.ini", QSettings::IniFormat);
+    szAdminName = settings.value("/name/admin").toString();
+    szPwd = settings.value("/password/pwd").toString();
+    qDebug()<<szAdminName<<szPwd;

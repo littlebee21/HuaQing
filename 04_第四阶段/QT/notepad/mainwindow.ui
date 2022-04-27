@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1560</width>
+    <height>900</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QTextEdit" name="textEdit"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1560</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>文件</string>
+    </property>
+    <addaction name="newAction"/>
+    <addaction name="action_2"/>
+    <addaction name="openAction"/>
+    <addaction name="action_4"/>
+    <addaction name="action_5"/>
+    <addaction name="separator"/>
+    <addaction name="action_6"/>
+    <addaction name="action_7"/>
+    <addaction name="separator"/>
+    <addaction name="action_8"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>编辑</string>
+    </property>
+    <addaction name="findAction"/>
+   </widget>
+   <widget class="QMenu" name="menu_3">
+    <property name="title">
+     <string>格式</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menu_4">
+    <property name="title">
+     <string>查看</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menu_5">
+    <property name="title">
+     <string>帮助</string>
+    </property>
+    <addaction name="action_11"/>
+    <addaction name="action_12"/>
+    <addaction name="separator"/>
+    <addaction name="aboutAction"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_2"/>
+   <addaction name="menu_3"/>
+   <addaction name="menu_4"/>
+   <addaction name="menu_5"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="newAction">
+   <property name="text">
+    <string>新建(&amp;N)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="action_2">
+   <property name="text">
+    <string>新窗口(&amp;W)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+N</string>
+   </property>
+  </action>
+  <action name="openAction">
+   <property name="text">
+    <string>打开(&amp;O)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="action_4">
+   <property name="text">
+    <string>保存</string>
+   </property>
+  </action>
+  <action name="action_5">
+   <property name="text">
+    <string>另存为</string>
+   </property>
+  </action>
+  <action name="action_6">
+   <property name="text">
+    <string>页面设置</string>
+   </property>
+  </action>
+  <action name="action_7">
+   <property name="text">
+    <string>打印</string>
+   </property>
+  </action>
+  <action name="action_8">
+   <property name="text">
+    <string>退出</string>
+   </property>
+  </action>
+  <action name="action_11">
+   <property name="text">
+    <string>查看帮助</string>
+   </property>
+  </action>
+  <action name="action_12">
+   <property name="text">
+    <string>发送反馈</string>
+   </property>
+  </action>
+  <action name="aboutAction">
+   <property name="text">
+    <string>关于记事本</string>
+   </property>
+  </action>
+  <action name="findAction">
+   <property name="text">
+    <string>查找(&amp;F)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

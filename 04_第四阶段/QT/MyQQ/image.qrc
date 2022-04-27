@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>image/closeBtn/close_hoverd.png</file>
+        <file>image/closeBtn/close_normal.png</file>
+        <file>image/closeBtn/close_pressed.png</file>
+        <file>image/minBtn/minBtn.png</file>
+        <file>image/restore/restore.png</file>
+    </qresource>
+</RCC>

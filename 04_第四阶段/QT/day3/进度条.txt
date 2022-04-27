@@ -1,0 +1,103 @@
+进度条QProgressBar用法详解
+
+Qt提供了两种显示进度条的方式：一种是QProgressBar，提供了一种横向或者纵向显示进度的控件表示方式，用来描述任务的完成情况；另一种是QProgressDialog，提供了一种针对慢速过程的进度对话框表示方式，用于描述任务完成的进度情况。标准的进度条对话框包括一个进度显示条、一个取消按钮及一个标签。
+
+1、 QProgressBar基本用法
+    m_pConnectProBar = new QProgressBar;
+    m_pConnectProBar->setRange(0,100); //设置进度条最小值和最大值(取值范围)
+    m_pConnectProBar->setMinimum(0); //设置进度条最小值
+    m_pConnectProBar->setMaximum(100); //设置进度条最大值
+    m_pConnectProBar->setValue(50);  //设置当前的运行值
+    m_pConnectProBar->reset(); //让进度条重新回到开始
+    m_pConnectProBar->setOrientation(Qt::Horizontal);  //水平方向
+    m_pConnectProBar->setOrientation(Qt::Vertical);  //垂直方向
+    m_pConnectProBar->setAlignment(Qt::AlignVCenter);  // 对齐方式 
+    m_pConnectProBar->setTextVisible(false); //隐藏进度条文本
+    m_pConnectProBar->setFixedSize(258,5);   //进度条固定大小
+    m_pConnectProBar->setInvertedAppearance(true); //true:反方向  false:正方向
+    m_pConnectProBar->setVisible(false);  //false:隐藏进度条  true:显示进度条
+
+
+2、 读取方向
+枚举QProgressBar::Direction  ：指定垂直进度条文本的读取方向
+
+
+
+这个属性对水平进度条没有影响。默认情况下，读取方向为： QProgressBar::TopToBottom
+
+3、进度方向
+当水平进度时，可以从左到右，也可以从右到左；同样，垂直显示进度时，可以从上到下，也可以从下到上。
+
+[cpp] view plain copy
+QProgressBar *m_pLeftToRightProBar = new QProgressBar(this);  
+m_pLeftToRightProBar->setOrientation(Qt::Horizontal);  // 水平方向  
+m_pLeftToRightProBar->setMinimum(0);  // 最小值  
+m_pLeftToRightProBar->setMaximum(100);  // 最大值  
+m_pLeftToRightProBar->setValue(50);  // 当前进度  
+  
+QProgressBar *m_pRightToLeftProBar = new QProgressBar(this);  
+m_pRightToLeftProBar->setOrientation(Qt::Horizontal);  // 水平方向  
+m_pRightToLeftProBar->setMinimum(0);  // 最小值  
+m_pRightToLeftProBar->setMaximum(100);  // 最大值  
+m_pRightToLeftProBar->setValue(50);  // 当前进度  
+m_pRightToLeftProBar->setInvertedAppearance(true);  // 反方向  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include "widget.h"
+#include "ui_widget.h"
+
+Widget::Widget(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::Widget)
+{
+    ui->setupUi(this);
+    timer = new QTimer(this);
+    //timer->setInterval(2000); //设置定时周期，单位：毫秒
+    ui->progressBar->setRange(0, 99);
+    ui->progressBar->setValue(0);
+
+    connect(ui->startBtn, SIGNAL(clicked()), this, SLOT(slotStart()));
+    connect(ui->stopBtn, SIGNAL(clicked()), this, SLOT(slotStop()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(slotProcessBar()));
+}
+
+void Widget::slotStart()
+{
+    timer->start();
+}
+
+void Widget::slotStop()
+{
+    timer->stop(100);
+}
+
+void Widget::slotProcessBar()
+{
+    static int npos = 0;
+
+    if(npos == 100)
+    {
+        timer->stop();
+        return;
+    }
+
+    ui->progressBar->setValue(npos++);
+}
+
+
+
+

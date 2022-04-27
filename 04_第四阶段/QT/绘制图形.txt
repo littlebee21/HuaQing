@@ -1,0 +1,35 @@
+函数需要在头文件中声明
+
+protected:
+    void paintEvent(QPaintEvent *);
+
+void Widget::paintEvent(QPaintEvent *)
+{
+#if 0
+    painter = new QPainter;
+    painter->begin(this);
+    painter->setPen(QPen(Qt::blue,4,Qt::DashLine));//设置画笔形式
+    //painter->setBrush(QBrush(Qt::red,Qt::SolidPattern));//设置画刷形式
+    //painter->drawRect(20,20,160,160);
+    painter->drawRoundedRect(20,20,160,160, 20, 20);
+    painter->end();
+
+    QPainter *painter1 = new QPainter;
+    painter1->begin(this);
+    painter1->setPen(QPen(Qt::blue,4,Qt::SolidLine));
+    painter1->setBrush(QBrush(Qt::red,Qt::SolidPattern));
+    painter1->drawEllipse(120,120,210,210);
+    //painter1->drawPie(20,20,210,160,0,500);   // 扇形
+#endif
+
+    QPainter painter(this);
+    painter.setPen(QPen(Qt::blue,4));//设置画笔形式
+    painter.setBrush(QBrush(Qt::red,Qt::SolidPattern));
+    painter.drawLine(20,20,220,220);//画直线
+    painter.drawLine(20,220,220,20);
+    painter.drawEllipse(20,20,200,200);//画圆
+    painter.drawRect(20,20,200,200);//画矩形
+}
+
+上面程序中在paintEvent函数中绘图，但是paintEvent函数并没有被显式调用，但确实能画出图像。其实paintEven函数在QWidget类中已经被定义，它被定义成虚函数，MainWindow类从QWidget类继承下来，因此实际执行的是MainWindow类的函数。每当需要重绘窗口时（如窗口大小改变时，窗口被遮挡恢复时），系统就会自动调用paintEvent这个函数。 
+QPainter类用来绘制各种图形，通过QPen、QBrush类来设置图形笔画、填充方式。
