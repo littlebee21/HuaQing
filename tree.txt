@@ -154,7 +154,7 @@
 │       ├── widget.cpp
 │       ├── widget.h
 │       └── 绘制图形.txt
-├── README.md
-└── git_new.sh
+├── git_new.sh
+└── tree.txt
 
 59 directories, 98 files
